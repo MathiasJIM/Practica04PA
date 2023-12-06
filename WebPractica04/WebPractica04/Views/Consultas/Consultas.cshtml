@@ -1,0 +1,38 @@
+﻿@model List<WebPractica04.Entity.principalEntity>
+
+@{
+    ViewBag.Title = "Consultas";
+}
+
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <button class="my-4 btn btn-dark">Consultar</button>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-striped table-hover">
+            <thead class="thead-dark">
+                <tr>
+                    <th class="text-center">ID</th>
+                    <th class="text-center">Código de Compra</th>
+                    <th class="text-center">Descripción</th>
+                    <th class="text-center">Precio</th>
+                    <th class="text-center">Saldo</th>
+                    <th class="text-center">Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr class="table-success">
+                        <td class="text-center">@item.PrincipalID</td>
+                        <td class="text-center">@item.CodigoCompra</td>
+                        <td class="text-center">@item.Descripcion</td>
+                        <td class="text-center">@item.Precio.ToString("C")</td>
+                        <td class="text-center">@item.Saldo.ToString("C")</td>
+                        <td class="text-center">@item.Estado</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

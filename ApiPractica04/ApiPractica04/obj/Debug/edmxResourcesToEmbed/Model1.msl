@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Practica4PAModelStoreContainer" CdmEntityContainer="Practica4PAEntities">
+    <EntitySetMapping Name="Abonos">
+      <EntityTypeMapping TypeName="Practica4PAModel.Abonos">
+        <MappingFragment StoreEntitySet="Abonos">
+          <ScalarProperty Name="AbonoID" ColumnName="AbonoID" />
+          <ScalarProperty Name="PrincipalID" ColumnName="PrincipalID" />
+          <ScalarProperty Name="Compra" ColumnName="Compra" />
+          <ScalarProperty Name="Abono" ColumnName="Abono" />
+          <ScalarProperty Name="SaldoAnterior" ColumnName="SaldoAnterior" />
+          <ScalarProperty Name="FechaAbono" ColumnName="FechaAbono" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Principal">
+      <EntityTypeMapping TypeName="Practica4PAModel.Principal">
+        <MappingFragment StoreEntitySet="Principal">
+          <ScalarProperty Name="PrincipalID" ColumnName="PrincipalID" />
+          <ScalarProperty Name="CodigoCompra" ColumnName="CodigoCompra" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

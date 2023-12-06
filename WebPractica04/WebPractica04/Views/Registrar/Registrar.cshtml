@@ -1,0 +1,67 @@
+﻿@model IEnumerable<WebPractica04.Entity.principalEntity>
+@{
+    ViewBag.Title = "Registrar";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title text-center mb-4">Registro de Pago Parcial</h2>
+                    @using (Html.BeginForm("Registrar", "Registrar", FormMethod.Post, new { @class = "pt-3", @id = "myForm" }))
+                    {
+                        <div class="form-group mb-1">
+                            <label for="selectCompra">Seleccione la Compra:</label>
+                            @Html.DropDownListFor(m => m.First().PrincipalID, new SelectList(Model.Where(x => x.Estado == "Pendiente"), "PrincipalID", "Descripcion"), new { @class = "form-control form-control-lg", @placeholder = "Compra", @id = "selectCompra" })
+                        </div>
+                        <div class="form-group mb-1">
+                            <label for="saldoAnterior">Saldo Anterior:</label>
+                            <input type="text" class="form-control" id="saldoAnterior" readonly>
+                        </div>
+                        <div class="form-group mb-1">
+                            <label for="abono">Abono (Nuevo Saldo):</label>
+                            @Html.TextBoxFor(m => m.First().Saldo, new { @class = "form-control", @required = "required", @id = "abono" })
+                        </div>
+                        @Html.HiddenFor(m => m.First().PrincipalID, new { @id = "hiddenPrincipalID" })
+                        @Html.HiddenFor(m => m.First().Saldo, new { @id = "hiddenAbono" })
+
+
+                        <button type="submit" class="btn btn-primary btn-block" id="btnAbonar">Abonar</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    // Actualizar el valor del campo de saldo anterior al cambiar la selección
+    $("#selectCompra").change(function () {
+        var selectedProductId = $(this).val();
+        var selectedProduct = obtenerProductPorId(selectedProductId);
+        $("#saldoAnterior").val(selectedProduct.Saldo);
+
+        // Actualizar los valores de los campos ocultos
+        $("#hiddenPrincipalID").val(selectedProductId);
+    });
+
+    // Manejar el evento de envío del formulario
+    $("#myForm").submit(function () {
+        // Obtener el valor del abono y asignarlo al campo oculto
+        var abonoValue = $("#abono").val();
+        $("#hiddenAbono").val(abonoValue);
+    });
+
+    // Función para obtener un producto por ID
+    function obtenerProductPorId(productId) {
+        var productos = @Html.Raw(Json.Encode(Model));
+        for (var i = 0; i < productos.length; i++) {
+            if (productos[i].PrincipalID == productId) {
+                return productos[i];
+            }
+        }
+        return null;
+    }
+</script>

@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Practica4PAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Abonos">
+          <Key>
+            <PropertyRef Name="AbonoID" />
+          </Key>
+          <Property Name="AbonoID" Type="int" Nullable="false" />
+          <Property Name="PrincipalID" Type="int" />
+          <Property Name="Compra" Type="nvarchar" MaxLength="20" />
+          <Property Name="Abono" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="SaldoAnterior" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="FechaAbono" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Principal">
+          <Key>
+            <PropertyRef Name="PrincipalID" />
+          </Key>
+          <Property Name="PrincipalID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodigoCompra" Type="nvarchar" MaxLength="20" />
+          <Property Name="Descripcion" Type="nvarchar" MaxLength="255" />
+          <Property Name="Precio" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Saldo" Type="decimal" Precision="10" Scale="2" />
+          <Property Name="Estado" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__Abonos__Principa__3F466844">
+          <End Role="Principal" Type="Self.Principal" Multiplicity="0..1" />
+          <End Role="Abonos" Type="Self.Abonos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Principal">
+              <PropertyRef Name="PrincipalID" />
+            </Principal>
+            <Dependent Role="Abonos">
+              <PropertyRef Name="PrincipalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Practica4PAModelStoreContainer">
+          <EntitySet Name="Abonos" EntityType="Self.Abonos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Principal" EntityType="Self.Principal" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Abonos__Principa__3F466844" Association="Self.FK__Abonos__Principa__3F466844">
+            <End Role="Principal" EntitySet="Principal" />
+            <End Role="Abonos" EntitySet="Abonos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Practica4PAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Abonos">
+          <Key>
+            <PropertyRef Name="AbonoID" />
+          </Key>
+          <Property Name="AbonoID" Type="Int32" Nullable="false" />
+          <Property Name="PrincipalID" Type="Int32" />
+          <Property Name="Compra" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Abono" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="SaldoAnterior" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="FechaAbono" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Principal" Relationship="Self.FK__Abonos__Principa__398D8EEE" FromRole="Abonos" ToRole="Principal" />
+        </EntityType>
+        <EntityType Name="Principal">
+          <Key>
+            <PropertyRef Name="PrincipalID" />
+          </Key>
+          <Property Name="PrincipalID" Type="Int32" Nullable="false" />
+          <Property Name="CodigoCompra" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Precio" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Saldo" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="Estado" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Abonos" Relationship="Self.FK__Abonos__Principa__398D8EEE" FromRole="Principal" ToRole="Abonos" />
+        </EntityType>
+        <Association Name="FK__Abonos__Principa__398D8EEE">
+          <End Role="Principal" Type="Self.Principal" Multiplicity="0..1" />
+          <End Role="Abonos" Type="Self.Abonos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Principal">
+              <PropertyRef Name="PrincipalID" />
+            </Principal>
+            <Dependent Role="Abonos">
+              <PropertyRef Name="PrincipalID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Practica4PAEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Abonos" EntityType="Self.Abonos" />
+          <EntitySet Name="Principal" EntityType="Self.Principal" />
+          <AssociationSet Name="FK__Abonos__Principa__398D8EEE" Association="Self.FK__Abonos__Principa__398D8EEE">
+            <End Role="Principal" EntitySet="Principal" />
+            <End Role="Abonos" EntitySet="Abonos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Practica4PAModelStoreContainer" CdmEntityContainer="Practica4PAEntities">
+          <EntitySetMapping Name="Abonos">
+            <EntityTypeMapping TypeName="Practica4PAModel.Abonos">
+              <MappingFragment StoreEntitySet="Abonos">
+                <ScalarProperty Name="AbonoID" ColumnName="AbonoID" />
+                <ScalarProperty Name="PrincipalID" ColumnName="PrincipalID" />
+                <ScalarProperty Name="Compra" ColumnName="Compra" />
+                <ScalarProperty Name="Abono" ColumnName="Abono" />
+                <ScalarProperty Name="SaldoAnterior" ColumnName="SaldoAnterior" />
+                <ScalarProperty Name="FechaAbono" ColumnName="FechaAbono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Principal">
+            <EntityTypeMapping TypeName="Practica4PAModel.Principal">
+              <MappingFragment StoreEntitySet="Principal">
+                <ScalarProperty Name="PrincipalID" ColumnName="PrincipalID" />
+                <ScalarProperty Name="CodigoCompra" ColumnName="CodigoCompra" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
